@@ -1,0 +1,8 @@
+CFLAGS += -fpermissive
+LFLAGS += -fpermissive
+
+OPENCV_CFLAGS = `pkg-config --cflags ${EXT_PATH}/opencv/lib/pkgconfig/opencv.pc`
+OPENCV_LFLAGS = `pkg-config --libs ${EXT_PATH}/opencv/lib/pkgconfig/opencv.pc` 
+OPENCV_DEVEL = 0
+
+SVL_PROJECTS := svl/apps/vision
