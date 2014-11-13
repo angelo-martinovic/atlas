@@ -9,11 +9,16 @@ The code is owned by the [KU Leuven university](https://securewww.esat.kuleuven.
 
 -----
 
+Setup
+============
+Read setup.txt
+
 Disclaimer
 ============
 THIS CODE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Use at your own risk.
 
 -----
+
 
 FAQ
 ============
