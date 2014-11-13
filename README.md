@@ -42,7 +42,7 @@ If you are using this code for your new publication, please cite our ECCV2012 pa
           pages     = {416--429}
           }
 
-          @MISC{ATLAS,
+       @MISC{ATLAS,
             title = {{ATLAS: A Three-Layered Approach to Facade Parsing}},
             howpublished = {\url{http://bitbucket.org/amartino/atlas}},
             year = {2014}
