@@ -12,8 +12,9 @@ The code is owned by the [KU Leuven university](https://securewww.esat.kuleuven.
 Setup
 ============
 You will need: 
-     - setup.txt
-     - patience.
+
+    - setup.txt
+    - patience.
 
 Disclaimer
 ============
