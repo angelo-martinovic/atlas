@@ -1,0 +1,18 @@
+syntax: glob
+*.aux
+*.blg
+*.brf
+*.log
+*.pdf
+*.mat
+*~
+*.backup
+additionalFiles/cuda_5.5.22_linux_64.run
+additionalFiles/biclop.zip
+biclop/**
+datasets/**
+lasik-2.4/**
+libsvm-3.14/**
+vlfeat-0.9.14/**
+work/**
+zurich/atlasfull/data/**

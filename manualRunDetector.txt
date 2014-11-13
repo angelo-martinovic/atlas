@@ -1,0 +1,3 @@
+detector/objects_detection -c detector/configs/window-generic.ini --objects_detector.model detector/models/window-generic.bin --recording_path /usr/data/amartino/monge428/reconstruction.nvm.cmvs/00/visualizeRotated/ --process_folder /usr/data/amartino/monge428/reconstruction.nvm.cmvs/00/visualizeRotated/imgs
+
+python detections_to_wnd_eval_normalized.py -d /esat/sadr/amartino/monge428/reconstruction.nvm.cmvs/00/visualizeRotated/detections/detections.data_sequence -o /esat/sadr/amartino/monge428/reconstruction.nvm.cmvs/00/visualizeRotated/detections/detections_window -m /esat/sadr/amartino/threeLayer/detector/models/window-generic.bin
