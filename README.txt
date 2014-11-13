@@ -33,7 +33,15 @@
 
       1. install the SVL library with the necessary dependencies
       2. compile the EDISON segmentation tool
-      3. compile the detector code
+      3. --compile the detector code--
+	  # UNFORTUNATELY, WE CANNOT SHARE THE SOURCE CODE OF THE DETECTORS
+	  # DUE TO LICENSING ISSUES.
+	  # A COMPILED VERSION OF objects_detection CAN
+	  # BE FOUND IN THE detectors/ FOLDER.
+
+	  # IF YOU WANT TO COMPILE THE DETECTORS YOURSELF, PLEASE
+	  # ASK THE ORIGINAL AUTHORS OF THE DETECTOR FOR THEIR CODE: 
+	  # https://bitbucket.org/rodrigob/doppia/
 
                 3.1. if compilation fails due to incompatible protocol buffer files (BIWI):
                         - edit biclop/generate_protocol_buffer_files.sh and change the call of protoc to /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/local/bin/protoc
