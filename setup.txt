@@ -1,7 +1,8 @@
 
 
   0. Dependencies:
-    0.1 CUDA (drivers and CUDA toolkit 5.5) - works with CUDA 4.2 as well (BIWI)
+    0.1 (optional, for detectors)
+	CUDA (drivers and CUDA toolkit 5.5) - works with CUDA 4.2 as well (BIWI)
         For CUDA 5.5:
               - run additionalFiles/cuda_5.5.22_linux_64.run -override compiler
               - remember the install path CUDAPATH
@@ -21,19 +22,20 @@
       If the compilation fails, replace the SDL-1.2.15/src/video/x11/SDL_x11sym.h with 
       the version from additionalFiles/
 
-    0.3 protobuf-devel
+    0.3 (optional, for detectors)
+	protobuf-devel
 
     0.4 libpng
 
  On debian: 
-        0.1 create a symbolic link to lasik-2.4
+        0.1 create a symbolic link to lasik-2.4 (Stair Vision Library)
 
   1. run installAll.sh
     This script will : 
 
-      1. install the SVL library with the necessary dependencies
+      1. install the SVL (Stair Vision Library) library with the necessary dependencies
       2. compile the EDISON segmentation tool
-      3. --compile the detector code--
+      3. OPTIONAL: compile the detector code
 	  # UNFORTUNATELY, WE CANNOT SHARE THE SOURCE CODE OF THE DETECTORS
 	  # DUE TO LICENSING ISSUES.
 	  # A COMPILED VERSION OF objects_detection CAN
@@ -47,43 +49,47 @@
                         - edit biclop/generate_protocol_buffer_files.sh and change the call of protoc to /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/local/bin/protoc
                         - follow the remaining steps in installAll.sh (run the provided sed commands, or change files manually)
 
-      4. (BIWI) Make sure the following is written in biclop/common_settings.cmake, under if(HOSTED_AT_VISICS GREATER -1):
-        set(local_CUDA_LIB_DIR "/usr/lib/x86_64-linux-gnu")
-        set(local_CUDA_LIB "/usr/lib/x86_64-linux-gnu/libcuda.so")
-        set(local_CUDA_CUT_INCLUDE_DIRS "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/include")
-        set(local_CUDA_CUT_LIBRARY_DIRS "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/lib")
-        set(CUDA_NVCC_EXECUTABLE  /usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/bin/nvcc   )
-        set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} -arch=sm_20 --compiler-bindir=/scratch_net/biwisrv01_second/varcity/code/grammar/ATLAS/tmp)
-        (If the compiler-bindir flag breaks the compilation, remove it. The tmp folder contains symlinks to gcc-4.6 and g++-4.6 which were needed to compile old CUDA stuff)
+		3.2. (BIWI) Make sure the following is written in biclop/common_settings.cmake, under if(HOSTED_AT_VISICS GREATER -1):
+		  set(local_CUDA_LIB_DIR "/usr/lib/x86_64-linux-gnu")
+		  set(local_CUDA_LIB "/usr/lib/x86_64-linux-gnu/libcuda.so")
+		  set(local_CUDA_CUT_INCLUDE_DIRS "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/include")
+		  set(local_CUDA_CUT_LIBRARY_DIRS "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/lib")
+		  set(CUDA_NVCC_EXECUTABLE  /usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/bin/nvcc   )
+		  set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} -arch=sm_20 --compiler-bindir=/scratch_net/biwisrv01_second/varcity/code/grammar/ATLAS/tmp)
+		  (If the compiler-bindir flag breaks the compilation, remove it. The tmp folder contains symlinks to gcc-4.6 and g++-4.6 which were needed to compile old CUDA stuff)
 
-        include_directories(
-                /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/src
-          )
+		  include_directories(
+			  /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/src
+		    )
 
-        link_directories(
-                /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/local/lib
-        )
+		  link_directories(
+			  /scratch_net/biwisrv01_second/varcity/code/lib/protobuf-2.5.0/local/lib
+		  )
 
-        5. (BIWI) Make sure the following is written in biclop/src/applications/objects_detection/CMakeLists.txt:
-        if(USE_GPU)
-                set(CUDA_TOOLKIT_ROOT_DIR "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/")
-                set(CUDA_SDK_ROOT_DIR "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda")
-        ...
+		  5. (BIWI) Make sure the following is written in biclop/src/applications/objects_detection/CMakeLists.txt:
+		  if(USE_GPU)
+			  set(CUDA_TOOLKIT_ROOT_DIR "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda/")
+			  set(CUDA_SDK_ROOT_DIR "/usr/pack/cuda-4.2-bs/amd64-debian-linux6.0/cuda")
+		  ...
 
-        set(local_LIBRARY_DIRS
-                "/scratch_net/biwisrv01_second/varcity/code/lib/SDL-1.2.15/local/"
-                "/scratch_net/biwisrv01_second/varcity/code/lib/opencv-2.4.9/localCUDA/lib"
-        ...
+		  set(local_LIBRARY_DIRS
+			  "/scratch_net/biwisrv01_second/varcity/code/lib/SDL-1.2.15/local/"
+			  "/scratch_net/biwisrv01_second/varcity/code/lib/opencv-2.4.9/localCUDA/lib"
+		  ...
 
-        set(local_INCLUDE_DIRS
-                "/scratch_net/biwisrv01_second/varcity/code/lib/SDL-1.2.15/local/"
-                "/scratch_net/biwisrv01_second/varcity/code/lib/opencv-2.4.9/localCUDA/include"
+		  set(local_INCLUDE_DIRS
+			  "/scratch_net/biwisrv01_second/varcity/code/lib/SDL-1.2.15/local/"
+			  "/scratch_net/biwisrv01_second/varcity/code/lib/opencv-2.4.9/localCUDA/include"
 
   2. Create mex files for libsvm-3.14: matlab, go to libsvm-3.14/matlab folder and run make
   3. run app.py
-    Example:
 
-    python app.py -o /scratch_net/biwisrv01_second/varcity/code/grammar/ATLAS/test1/ --datasetName haussmann --fold 1 --enableWindowDetector --windowDetectorName window-specific --enableDoorDetector --doorDetectorName door-specific
+    Examples:
+    (no detectors)
+    python app.py -o ($ATLAS_folder)/test/ --datasetName haussmann --fold 1
 
-        (delete the test1 folder if it already exists)
+    (with detectors)
+    python app.py -o ($ATLAS_folder)/test/ --datasetName haussmann --fold 1 --enableWindowDetector --windowDetectorName window-specific --enableDoorDetector --doorDetectorName door-specific
+    
+        (delete the test folder if it already exists)
 
