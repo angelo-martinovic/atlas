@@ -86,3 +86,4 @@
     python app.py -o /scratch_net/biwisrv01_second/varcity/code/grammar/ATLAS/test1/ --datasetName haussmann --fold 1 --enableWindowDetector --windowDetectorName window-specific --enableDoorDetector --doorDetectorName door-specific
 
         (delete the test1 folder if it already exists)
+
