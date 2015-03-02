@@ -4,7 +4,6 @@ syntax: glob
 *.brf
 *.log
 *.pdf
-*.mat
 *~
 *.backup
 additionalFiles/cuda_5.5.22_linux_64.run
@@ -16,3 +15,4 @@ libsvm-3.14/**
 vlfeat-0.9.14/**
 work/**
 zurich/atlasfull/data/**
+matlab/classifierModels/**
